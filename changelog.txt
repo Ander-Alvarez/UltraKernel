@@ -1,2 +1,4 @@
-UltraKernel v1.0
+UltraKernel v1.0 changelog:
+·CRC check disabled
+
 
