@@ -125,8 +125,8 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 endchoice
 
 config CPU_FREQ_GOV_WHEATLEY
-	   tristate "'wheatley' cpufreq governor"
-	   depends on CPU_FREQ
+	   tristate "'wheatley' cpufreq governor"   
+       depends on CPU_FREQ
 
 config CPU_FREQ_GOV_SMARTMAX
         tristate "'smartmax' cpufreq policy governor"
