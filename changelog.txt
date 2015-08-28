@@ -1,4 +1,4 @@
-UltraKernel v1.0 changelog:
+﻿UltraKernel v1.0 changelog:
 ·CRC check disabled
 ·Swappiness reducided of 60 to 40
 ·SLUB optimized
@@ -6,3 +6,4 @@ UltraKernel v1.0 changelog:
 ·Enabled pipe flag
 ·ext4: more speed
 ·DT2W
+·PowerSuspend

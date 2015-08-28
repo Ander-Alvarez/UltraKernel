@@ -2833,6 +2833,10 @@ static int synaptics_rmi4_query_device(struct synaptics_rmi4_data *rmi4_data)
 	}
 
 	memset(rmi4_data->intr_mask, 0x00, sizeof(rmi4_data->intr_mask));
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+   input_set_capability(rmi4_data->input_dev, EV_KEY, KEY_POWER);
+   doubletap2wake_setdev(rmi4_data->input_dev);
+#endif
 
 	/*
 	 * Map out the interrupt bit masks for the interrupt sources
@@ -3884,3 +3888,4 @@ MODULE_AUTHOR("Synaptics, Inc.");
 MODULE_DESCRIPTION("Synaptics DSX I2C Touch Driver");
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION(SYNAPTICS_DSX_DRIVER_VERSION);
+

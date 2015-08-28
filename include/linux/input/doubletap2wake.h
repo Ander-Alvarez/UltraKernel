@@ -18,11 +18,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <linux/input.h>
+
 #ifndef _LINUX_DOUBLETAP2WAKE_H
 #define _LINUX_DOUBLETAP2WAKE_H
 
 extern bool dt2w_scr_suspended;
 extern int dt2w_switch;
+
+void doubletap2wake_setdev(struct input_dev *);
 
 #endif	/* _LINUX_DOUBLETAP2WAKE_H */
 
