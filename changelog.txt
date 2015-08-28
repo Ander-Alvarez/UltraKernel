@@ -5,3 +5,4 @@ UltraKernel v1.0 changelog:
 ·Enabled aggressive multi-core power savings
 ·Enabled pipe flag
 ·ext4: more speed
+·DT2W
