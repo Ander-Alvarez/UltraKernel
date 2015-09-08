@@ -1,9 +1,11 @@
-﻿UltraKernel v1.0 changelog:
-·CRC check disabled
-·Swappiness reducided of 60 to 40
-·SLUB optimized
-·Enabled aggressive multi-core power savings
-·Enabled pipe flag
-·ext4: more speed
-·DT2W
-·PowerSuspend
+***UltraKernel R7 changelog 08/09/2015***
+-Added KCAL support
+-Added support exFat
+-Compilation builded with neon mode and VFP
+-VM min/max increment
+-Optimize square root algorithm
+-Optimized AES & SHA1 routines
+-Use XZ and LZ4 compression
+-Stereo call recording support
+-Support asycn in fsync
+-Optimize cpufreq
