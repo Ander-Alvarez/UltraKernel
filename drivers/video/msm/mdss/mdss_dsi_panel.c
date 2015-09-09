@@ -37,7 +37,7 @@
 #include <linux/powersuspend.h>
 #endif
 
-#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+#ifdef CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE
 #include <linux/input/doubletap2wake.h>
 #endif
 
