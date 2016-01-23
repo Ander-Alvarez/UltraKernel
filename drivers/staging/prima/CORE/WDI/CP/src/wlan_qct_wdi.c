@@ -21583,7 +21583,7 @@ WDI_ResponseTimerCB
  @see
  @return Result of the function call
 */
-WPT_INLINE WDI_Status
+WPT_STATIC WDI_Status
 WDI_ProcessResponse
 (
   WDI_ControlBlockType*  pWDICtx,
@@ -21592,14 +21592,14 @@ WDI_ProcessResponse
 {
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-  /* Skip sanity check as this is called from the FSM functions which
+/* Skip sanity check as this is called from the FSM functions which
     already checked these pointers
     ! - revisit this assumption */
   if (( pEventData->wdiResponse < WDI_MAX_RESP ) &&
       ( NULL != pfnRspProcTbl[pEventData->wdiResponse] ))
   {
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
-              "Calling response processing function for resp %s (%d) %x",
+              "Calling response processing function for resp %s (%d) %p",
               WDI_getRespMsgString(pEventData->wdiResponse),
               pEventData->wdiResponse, pfnRspProcTbl[pEventData->wdiResponse]);
     return pfnRspProcTbl[pEventData->wdiResponse](pWDICtx, pEventData);
