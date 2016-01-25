@@ -28,6 +28,92 @@
 #define JPEG_DEC_ID 2
 #define UINT32_MAX (0xFFFFFFFFU)
 
+#ifdef CONFIG_COMPAT
+
+#define MSM_JPEG_IOCTL_GET_HW_VERSION32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 1, struct msm_jpeg_hw_cmd32)
+
+#define MSM_JPEG_IOCTL_RESET32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 2, struct msm_jpeg_ctrl_cmd32)
+
+#define MSM_JPEG_IOCTL_STOP32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 3, struct msm_jpeg_hw_cmds32)
+
+#define MSM_JPEG_IOCTL_START32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 4, struct msm_jpeg_hw_cmds32)
+
+#define MSM_JPEG_IOCTL_INPUT_BUF_ENQUEUE32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 5, struct msm_jpeg_buf32)
+
+#define MSM_JPEG_IOCTL_INPUT_GET32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 6, struct msm_jpeg_buf32)
+
+#define MSM_JPEG_IOCTL_OUTPUT_BUF_ENQUEUE32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 8, struct msm_jpeg_buf32)
+
+#define MSM_JPEG_IOCTL_OUTPUT_GET32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 9, struct msm_jpeg_buf32)
+
+#define MSM_JPEG_IOCTL_EVT_GET32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 11, struct msm_jpeg_ctrl_cmd32)
+
+#define MSM_JPEG_IOCTL_HW_CMD32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 13, struct msm_jpeg_hw_cmd32)
+
+#define MSM_JPEG_IOCTL_HW_CMDS32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 14, struct msm_jpeg_hw_cmds32)
+
+#define MSM_JPEG_IOCTL_TEST_DUMP_REGION32 \
+	_IOW(MSM_JPEG_IOCTL_MAGIC, 15, compat_ulong_t)
+
+struct msm_jpeg_ctrl_cmd32 {
+	uint32_t type;
+	uint32_t len;
+	compat_uptr_t value;
+};
+struct msm_jpeg_buf32 {
+	uint32_t type;
+	int fd;
+
+	compat_uptr_t vaddr;
+
+	uint32_t y_off;
+	uint32_t y_len;
+	uint32_t framedone_len;
+
+	uint32_t cbcr_off;
+	uint32_t cbcr_len;
+
+	uint32_t num_of_mcu_rows;
+	uint32_t offset;
+	uint32_t pln2_off;
+	uint32_t pln2_len;
+};
+
+struct msm_jpeg_hw_cmd32 {
+
+	uint32_t type:4;
+
+	/* n microseconds of timeout for WAIT */
+	/* n microseconds of time for DELAY */
+	/* repeat n times for READ/WRITE */
+	/* max is 0xFFF, 4095 */
+	uint32_t n:12;
+	uint32_t offset:16;
+	uint32_t mask;
+	union {
+		uint32_t data;   /* for single READ/WRITE/WAIT, n = 1 */
+		compat_uptr_t pdata;   /* for multiple READ/WRITE/WAIT, n > 1 */
+	};
+};
+
+struct msm_jpeg_hw_cmds32 {
+	uint32_t m; /* number of elements in the hw_cmd array */
+	struct msm_jpeg_hw_cmd32 hw_cmd[1];
+};
+#endif
+
+
 static inline void msm_jpeg_q_init(char const *name, struct msm_jpeg_q *q_p)
 {
 	JPEG_DBG("%s:%d] %s\n", __func__, __LINE__, name);
@@ -132,14 +218,14 @@ static inline int msm_jpeg_q_wait(struct msm_jpeg_q *q_p)
 	return rc;
 }
 
-inline int msm_jpeg_q_wakeup(struct msm_jpeg_q *q_p)
+static inline int msm_jpeg_q_wakeup(struct msm_jpeg_q *q_p)
 {
 	JPEG_DBG("%s:%d] %s\n", __func__, __LINE__, q_p->name);
 	wake_up(&q_p->wait);
 	return 0;
 }
 
-inline int msm_jpeg_q_unblock(struct msm_jpeg_q *q_p)
+static inline int msm_jpeg_q_unblock(struct msm_jpeg_q *q_p)
 {
 	JPEG_DBG("%s:%d] %s\n", __func__, __LINE__, q_p->name);
 	q_p->unblck = 1;
