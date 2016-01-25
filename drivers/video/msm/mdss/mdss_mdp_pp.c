@@ -403,10 +403,9 @@ static inline void pp_sts_set_split_bits(u32 *sts, u32 bits);
 
 static u32 last_sts, last_state;
 
-<<<<<<< HEAD
 int mdss_mdp_csc_setup_data(u32 block, u32 blk_idx, u32 tbl_idx,
 				   struct mdp_csc_cfg *data)
-=======
+
 static inline void mdss_mdp_pp_get_dcm_state(struct mdss_mdp_pipe *pipe,
 	u32 *dcm_state)
 {
@@ -429,7 +428,7 @@ static inline int linear_map(int in, int *out, int in_max, int out_max)
 }
 
 int mdss_mdp_csc_setup_data(u32 block, u32 blk_idx, struct mdp_csc_cfg *data)
->>>>>>> 4bc2b52... Fix build warnings encountered on GCC 5.2
+
 {
 	int i, ret = 0;
 	char __iomem *base, *addr;

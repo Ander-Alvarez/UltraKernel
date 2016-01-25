@@ -28,8 +28,6 @@
 #define JPEG_DEC_ID 2
 #define UINT32_MAX (0xFFFFFFFFU)
 
-<<<<<<< HEAD
-=======
 #ifdef CONFIG_COMPAT
 
 #define MSM_JPEG_IOCTL_GET_HW_VERSION32 \
@@ -116,7 +114,6 @@ struct msm_jpeg_hw_cmds32 {
 #endif
 
 
->>>>>>> 4bc2b52... Fix build warnings encountered on GCC 5.2
 static inline void msm_jpeg_q_init(char const *name, struct msm_jpeg_q *q_p)
 {
 	JPEG_DBG("%s:%d] %s\n", __func__, __LINE__, name);
